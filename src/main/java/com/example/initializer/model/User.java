@@ -15,14 +15,39 @@ public class User{
     @Column(name = "last_name", length = 64, nullable = false)
     private String lastName;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                // Add other fields as needed
-                '}';
+    public Long getId() {
+        return id;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+
+    //    @Override
+//    public String toString() {
+//
+//        String jsonResponse = "{" +
+//                "\"id\":" + id +
+//                ",\"firstName\":\"" + firstName + "\"" +
+//                ",\"lastName\":\"" + lastName + "\"" +
+//                // Add other fields as needed
+//                "}";
+//
+//        return jsonResponse;
+////        return "{" +
+////                "id=" + id +
+////                ", firstName'" + firstName + '\'' +
+////                ", lastName='" + lastName + '\'' +
+////                // Add other fields as needed
+////                '}';
+////        return String.format(
+////                "{'id':%d, 'firstName':'%s', 'lastName':'%s'}",
+////                id, firstName, lastName);
+//    }
     // Getters and setters
 }

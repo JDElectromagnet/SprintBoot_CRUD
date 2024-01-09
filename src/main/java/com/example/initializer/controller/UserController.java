@@ -1,6 +1,7 @@
 package com.example.initializer.controller;
 
 
+import com.example.initializer.dto.UserResponseDTO;
 import com.example.initializer.model.User;
 import com.example.initializer.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,24 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
-//
+
+
+    @GetMapping("/getAll")
+    public ResponseEntity<Object> findAll() {
+        Optional<User> userOptional = userService.findUserById(1);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            return ResponseEntity.ok(user);  // ResponseEntity.ok will automatically serialize the User object to JSON
+        } else {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+        }
+    }
+
+
+    //
 //    @GetMapping("/getAll")
 //    public ResponseEntity<Object> findAll() {
 //        Optional<User> userOptional = userService.findUserById(1);
@@ -31,20 +49,22 @@ public class UserController {
 //        }
 //    }
 
+//
+//    @GetMapping("/getAll")
+//    public ResponseEntity<Object> findAll() {
+//        Optional<User> userOptional = userService.findUserById(1);
+//
+//        if (userOptional.isPresent()) {
+//            User user = userOptional.get();
+//            return new ResponseEntity<>(user, HttpStatus.OK);
+//        } else {
+//            Map<String, String> error = new HashMap<>();
+//            error.put("error", "User not found");
+//            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+//        }
+//    }
 
-    @GetMapping("/getAll")
-    public ResponseEntity<Object> findAll() {
-        Optional<User> userOptional = userService.findUserById(1);
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } else {
-            Map<String, String> error = new HashMap<>();
-            error.put("error", "User not found");
-            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-        }
-    }
 
 //
 //    @GetMapping("/{userId}")
