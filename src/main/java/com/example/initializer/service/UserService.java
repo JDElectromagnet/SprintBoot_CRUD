@@ -32,4 +32,41 @@ public class UserService {
             throw e; // You might want to handle the exception more gracefully based on your requirements
         }
     }
+
+    public User createUser(User user) {
+        try {
+            return userRepository.save(user);
+        } catch (Exception e) {
+            logger.error("Error creating user: {}", user, e);
+            throw e; // You might want to handle the exception more gracefully based on your requirements
+        }
+    }
+
+    public User updateUserDetails(Long id, User updatedUser) throws Exception {
+        try {
+            Optional<User> userOptional = userRepository.findById(id);
+
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                user.setFirstName(updatedUser.getFirstName());
+                user.setLastName(updatedUser.getLastName());
+                return userRepository.save(user);
+            } else {
+                logger.info("User not found for ID: {}", id);
+                throw new Exception("User not found");
+            }
+        } catch (Exception e) {
+            logger.error("Error updating user with ID: {}", id, e);
+            throw e; // You might want to handle the exception more gracefully based on your requirements
+        }
+    }
+
+    public void deleteUser(Long id) {
+        try {
+            userRepository.deleteById(id);
+        } catch (Exception e) {
+            logger.error("Error deleting user with ID: {}", id, e);
+            throw e; // You might want to handle the exception more gracefully based on your requirements
+        }
+    }
 }
