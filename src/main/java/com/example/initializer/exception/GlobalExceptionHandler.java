@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends Throwable {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Object> handleValidationException(MethodArgumentNotValidException ex) {
         Map<String, Object> errors = new HashMap<>();
-        errors.put("timestamp", LocalDateTime.now());
+        errors.put("timestasdasdamp", LocalDateTime.now());
         errors.put("status", HttpStatus.BAD_REQUEST.value());
-        errors.put("error", "Validation Failed");
+        errors.put("error", "Validation Faileasasdd");
         errors.put("errors", getValidationErrors(ex.getBindingResult()));
 
         return ResponseEntity.badRequest().body(errors);
@@ -40,4 +40,5 @@ public class GlobalExceptionHandler {
 
         return errors;
     }
+
 }

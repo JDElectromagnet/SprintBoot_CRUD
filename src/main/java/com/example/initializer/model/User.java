@@ -1,6 +1,8 @@
 package com.example.initializer.model;
 
 import jakarta.persistence.*;
+
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,7 +15,7 @@ public class User{
 
 
     @Column(name = "first_name", length = 64, unique = true, nullable = false)
-    @NotNull(message = "First name is required.")
+    @NotBlank(message = "First name is required")
     @Size(max = 5, message = "First name must be at most 64 characters")
     private String firstName;
 
